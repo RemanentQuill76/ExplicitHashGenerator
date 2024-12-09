@@ -38,18 +38,6 @@ func main() {
 	// }
 }
 
-func juggle(arr []string) []string {
-	n := len(arr)
-	if n%2 == 0 {
-		for i := 0; i < n/2; i++ {
-			arr[i], arr[n-1-i] = arr[n-1-i], arr[i] // For even-size subsets
-		}
-	} else {
-		arr[0], arr[n-1] = arr[n-1], arr[0] // For odd-size subsets
-	}
-	return arr
-}
-
 func read_file(file string) []string {
 	f, err := os.Open(file)
 	if err != nil {

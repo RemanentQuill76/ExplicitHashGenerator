@@ -1,0 +1,9 @@
+
+
+shite
+
+Exact Length: length:10
+Minimum Length: length:>10
+Maximum Length: length:<1 0
+Length Range: length:5-10
+Contains Substring: contains:keyword

@@ -1,4 +1,4 @@
-package main
+package cpuSingleThread
 
 import (
 	"strings"
@@ -31,6 +31,22 @@ func generateAll (all []string, chars string) []string {
 		arr = append(arr, generate1(all[i])...)
 	}
 	return arr
+}
+
+func 
+
+func generateCombinations(mask string) []string {
+	// Convert mask into character sets
+	charSets := []string{}
+	for i := 0; i < len(mask); i++ {
+		if mask[i] == '?' && i+1 < len(mask) {
+			charSets = append(charSets, charSet(mask[i+1]))
+			i++ // Skip next character since it's part of the mask
+		} else {
+			charSets = append(charSets, string(mask[i]))
+		}
+	}
+	return combine(charSets, "")
 }
 
 func juggle(arr []string) []string {
