@@ -11,16 +11,25 @@ import (
 func main() {
 	fmt.Print("Welcome to the password generator")
 	time.Sleep(1 / 2 * time.Second)
-	fmt.Print("Please enter the filepath/name of the file you would like to read from: ")
-	// fmt.Print("will you be using cuda today? (y/n)")
 	scanner := bufio.NewScanner(os.Stdin)
 	var lines []string
-	if scanner.Scan() {
-		lines = read_file(scanner.Text())
-	} else {
-		fmt.Println("Failed to read input")
-		return
+
+	for {
+		fmt.Print("Please enter the filepath/name of the file you would like to read from: ")
+		if scanner.Scan() {
+			filePath := scanner.Text()
+			if _, err := os.Stat(filePath); os.IsNotExist(err) {
+				fmt.Println("File not found. Please try again.")
+				continue
+			}
+			lines = read_file(filePath)
+			break
+		} else {
+			fmt.Println("Failed to read input")
+			return
+		}
 	}
+
 	fmt.Printf("the initial password count is: %d\n", len(lines))
 	time.Sleep(1 / 2 * time.Second)
 	fmt.Println("Enter permutation depth (1-5):")
@@ -32,10 +41,6 @@ func main() {
 		return
 	}
 	fmt.Println("permutation depth is: ", depth)
-
-	// if err:= cu.0); err != nil {
-	//   panic(err)
-	// }
 }
 
 func read_file(file string) []string {
